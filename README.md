@@ -2,30 +2,6 @@
 
 This repository contains a collection of Metablock examples built for the XMPro platform. Each Metablock is a reusable component that can be integrated into XMPro applications.
 
-## Available Metablocks
-
-### [Autodesk Platform Services Viewer](src/packages/aps-view-basic)
-A Metablock for rendering 3D models using the Autodesk Platform Services (APS) Viewer. Supports loading and displaying 3D models from specified URLs using APS's Viewer API.
-
-## Repository Structure
-
-```
-src/
-└── packages/
-    └── aps-view-basic/
-        ├── aps-view-basic.xapp (optional)
-        ├── README.md
-        ├── aps-view-basic.html
-        ├── aps-view-basic.js
-        ├── aps-view-basic.css
-        └── tests/
-            ├── test-harness/
-            │   ├── test-harness.html
-            │   └── server.js
-            └── unit-tests/
-                └── viewer-tests.js
-```
-
 ## Getting Started
 
 1. Clone the repository:
@@ -40,11 +16,11 @@ src/
 
 ## Contributing
 
-We welcome contributions! To add a new Metablock:
+We welcome contributions! To add a new Metablock example:
 
 1. Create a new branch:
    ```bash
-   git checkout -b feature/your-metablock-name
+   git checkout -b your-metablock-name
    ```
 2. Follow our [Contributing Guidelines](CONTRIBUTING.md) for detailed instructions on:
    - Directory structure
@@ -83,4 +59,24 @@ For support:
 
 ## License
 
-[Specify your license here]
+MIT License
+
+Copyright (c) 2025 XMPro
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
