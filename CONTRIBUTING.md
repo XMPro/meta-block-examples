@@ -18,7 +18,7 @@ This guide will help you contribute new Metablock Examples to this repository. W
    ```
 2. Create a new branch for your Metablock:
    ```bash
-   git checkout -b feature/your-metablock-name
+   git checkout -b your-metablock-name
    ```
 
 ## Metablock Structure
@@ -26,18 +26,23 @@ This guide will help you contribute new Metablock Examples to this repository. W
 Your Metablock must follow this directory structure:
 
 ```
-src/packages/<your-metablock-name>/
-├── <ad-app-name>.xapp (optional)
-├── README.md
-├── <your-metablock-name>.html
-├── <your-metablock-name>.js
-├── <your-metablock-name>.css
-└── tests/
-    ├── test-harness/
-    │   ├── test-harness.html
-    │   └── server.js
-    └── unit-tests/
-        └── <unit-test-name>.js
+## Repository Structure
+
+```
+src/
+└── packages/
+    └── example/
+        ├── example.xapp (optional)
+        ├── README.md
+        ├── example.html
+        ├── example.js
+        ├── example.css
+        └── tests/
+            ├── test-harness/
+            │   ├── test-harness.html
+            │   └── server.js
+            └── unit-tests/
+                └── example-tests.js
 ```
 
 ### Required Files
