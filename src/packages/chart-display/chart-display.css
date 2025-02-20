@@ -1,0 +1,18 @@
+.axisWhite line{
+    stroke: #808080;
+  }
+  
+  .axisWhite path{
+    stroke: #808080;
+  }
+  
+  .axisWhite text{
+    fill: #808080;
+  }  
+  
+      .zoom {
+            cursor: move;
+            fill: none;
+            pointer-events: all;
+      }	
+      

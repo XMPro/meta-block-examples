@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Harness for XMPro Metablocks</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Link to the Metablock CSS file -->
+    <link rel="stylesheet" href="aps-view-with-auth.css">
+</head>
+<body>
+    <!-- Container for the Metablock HTML content -->
+    <div id="main">
+        <p id="loading">Loading content...</p>
+    </div>
+        
+    <!-- Include the Metablock JavaScript file -->
+    <script src="aps-view-with-auth.js"></script>
+    <script>
+        // Define your Autodesk API credentials
+        const CLIENT_ID = 'YOUR_CLIENT_ID';
+        const CLIENT_SECRET = 'YOUR_CLIENT_SECRET';
+        const DOCUMENT_ID = 'YOUR_DOCUMENT_ID';
+
+        /**
+         * Initializes the viewer by loading HTML content and setting up authentication
+         */
+        async function initialize() {
+            try {
+                // Fetch the content of main.html and inject it into the #main div
+                const htmlResponse = await fetch('aps-view-with-auth.html');
+                const html = await htmlResponse.text();
+                // Insert the fetched HTML into the #main div
+                document.getElementById('main').innerHTML = html;
+
+                // Get the authentication token
+                const token = await getToken();
+                
+                // Initialize static data for the Metablock
+                // This object allows passing specific initialization data to the JavaScript
+                // through the onValueMappingLoaded function
+                const data = {
+                    // This would be passed in from the XMPro Metablock Value Mapping configuration
+                    "client_id": CLIENT_ID,
+                    "client_secret": CLIENT_SECRET,
+                    "document_id": DOCUMENT_ID
+                };
+
+                // Call the onValueMappingLoaded function with the initialization data
+                // This function should be defined in aps-view-with-auth.js and will use the provided data
+                // to set up the Metablock's initial state
+                onValueMappingLoaded(data);
+            } catch (error) {
+                // Log any errors that occur during the initialization
+                console.error('Error initializing viewer:', error);
+                document.getElementById('loading').textContent = 'Error loading viewer. Please check console for details.';
+            }
+        }
+
+        // Start the initialization process
+        initialize();
+    </script>
+</body>
+</html>
