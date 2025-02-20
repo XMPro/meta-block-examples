@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Harness for XMPro Metablocks</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Link to the Metablock CSS file -->
+    <link rel="stylesheet" href="aps-view-with-auth.css">
+</head>
+<body>
+    <!-- Container for the Metablock HTML content -->
+    <div id="main">
+        <p id="loading">Loading content...</p>
+    </div>
+        
+    <!-- Include the Metablock JavaScript file -->
+    <script src="aps-view-with-auth.js"></script>
+    <script>
+        // Define your Autodesk API credentials
+        const CLIENT_ID = 'YOUR_CLIENT_ID';
+        const CLIENT_SECRET = 'YOUR_CLIENT_SECRET';
+
+        /**
+         * Retrieves an authentication token from the Autodesk API
+         * @returns {Promise<string>} The access token for Autodesk Forge
+         */
+        async function getToken() {
+            const url = 'https://developer.api.autodesk.com/authentication/v2/token';
+            const headers = {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json',
+                'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET)
+            };
+            const body = 'grant_type=client_credentials&scope=code:all data:read bucket:read viewables:read';
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: headers,
+                    body: body
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.access_token;
+            } catch (error) {
+                console.error('Error fetching token: ', error);
+                throw error;
+            }
+        }
+
+        /**
+         * Initializes the viewer by loading HTML content and setting up authentication
+         */
+        async function initialize() {
+            try {
+                // Fetch the content of main.html and inject it into the #main div
+                const htmlResponse = await fetch('aps-view-with-auth.html');
+                const html = await htmlResponse.text();
+                // Insert the fetched HTML into the #main div
+                document.getElementById('main').innerHTML = html;
+
+                // Get the authentication token
+                const token = await getToken();
+                
+                // Initialize static data for the Metablock
+                // This object allows passing specific initialization data to the JavaScript
+                // through the onDataLoaded function
+                const data = [{
+                    // Access_token: The access token for Autodesk Forge
+                    // This would be passed in from the XMPro Metablock configuration Data Source
+                    Access_token: token
+                    // Add any other required initialization parameters here, for example:
+                    // api_endpoint: "https://api.example.com/v1",
+                    // debug_mode: true,
+                    // theme: "dark"
+                }];
+
+                // Call the onDataLoaded function with the initialization data
+                // This function should be defined in aps-view-with-auth.js and will use the provided data
+                // to set up the Metablock's initial state
+                onDataLoaded(data);
+            } catch (error) {
+                // Log any errors that occur during the initialization
+                console.error('Error initializing viewer:', error);
+                document.getElementById('loading').textContent = 'Error loading viewer. Please check console for details.';
+            }
+        }
+
+        // Start the initialization process
+        initialize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: none;
+}
+
+.controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.diagram-container {
+  font-family: "Roboto", sans-serif;
+}
+.pump-box {
+  fill: url(#pumpGradient);
+  stroke: #3498db;
+  stroke-width: 2;
+  filter: url(#glow);
+}
+.pump-text {
+  fill: #bebebe;
+  font-size: x-small;
+  font-family: monospace;
+}
+.value-text {
+  font-weight: bold;
+}
+.flow-value {
+  fill: #f39c12;
+}
+.pressure-value {
+  fill: #3498db;
+}
+.pipe {
+  stroke: #bdc3c7;
+  fill: none;
+  transition: all 0.8s ease-in-out;
+}
+
+.pipe:hover {
+  stroke: #3498db80;
+  stroke-width: calc(var(--stroke-width, 8px) + 8px);
+}
+
+.pipe::after {
+  content: "Hello";
+  color: red;
+  width: 20px;
+}
+
+.motor-pipe {
+  stroke-width: 14;
+  stroke: #707d83;
+  fill: none;
+  transition: all 0.8s ease-in-out;
+}
+
+.pipe-thick {
+  stroke-width: 14;
+}
+
+.connector {
+  stroke: #a5a7a8;
+  fill: none;
+  transition: all 0.8s ease-in-out;
+}
+
+.junction {
+  fill: #a5a7a8;
+}
+
+.arrow {
+  fill: #ecf0f1;
+}
+.status-indicator {
+  stroke-width: 2;
+}
+.running {
+  fill: #2ecc71;
+}
+.not-running {
+  fill: #e74c3c;
+}
+@keyframes flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+.animated-flow {
+  transition: all 0.3s ease-in-out;
+  stroke-linecap: round;
+  fill: none;
+  stroke: #3498db;
+  stroke-width: 10;
+  stroke-dasharray: 0 20;
+  stroke-dashoffset: 0;
+  animation: flow 2s linear infinite;
+  pointer-events: none;
+}
+
+.pipe:hover + .animated-flow {
+  stroke-width: calc(var(--stroke-width, 14px) + 60px);
+}
+
+.pump-running {
+  stroke-linecap: round;
+  fill: none;
+  stroke: #3498db;
+  stroke-dasharray: 0 10;
+  stroke-dashoffset: 0;
+  animation: flow 2s linear infinite;
+  box-shadow: 0 0 5px #101c24;
+  filter: blur(1px);
+  stroke-width: 6;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pump-group .pump-text {
+  opacity: 0.1;
+  transition: opacity 0.3s ease;
+}
+.pump-group:hover .pump-text {
+  opacity: 1;
+}
+
+
+a {
+    cursor: pointer;
+}
+
+a:hover {
+    fill: #3498db;
+}

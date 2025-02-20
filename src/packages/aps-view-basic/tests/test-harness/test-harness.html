@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Harness for XMPro Metablocks</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Link to the Metablock CSS file -->
+    <link rel="stylesheet" href="aps-view-basic.css">
+</head>
+<body>
+    <!-- Container for the Metablock HTML content -->
+    <div id="main">
+        <p id="loading">Loading content...</p>
+    </div>
+        
+    <!-- Include the Metablock JavaScript file -->
+    <script src="aps-view-basic.js"></script>
+
+    <script>
+        // Fetch the content of main.html and inject it into the #main div
+        fetch('aps-view-basic.html')
+            .then(response => response.text())
+            .then(html => {
+                // Insert the fetched HTML into the #main div
+                document.getElementById('main').innerHTML = html;
+
+                // Initialize static data for the Metablock
+                // This object allows passing specific initialization data to the JavaScript
+                // through the onValueMappingLoaded function
+                var data = {
+
+                    // model_url: The url of the model to be displayed in the Metablock
+                    // This would be passed in from the XMPro Metablock configuration Value Mapping.
+
+                    model_url: "https://developer-autodesk.github.io/translated-models/dwfx-sample-house/f0224dd3-8767-45c1-ff99-5c9c881b9fee/0.svf"
+
+                    // Add any other required initialization parameters here, for example:
+                    // api_endpoint: "https://api.example.com/v1",
+                    // debug_mode: true,
+                    // theme: "dark"
+                    
+                }
+
+                // Call the onValueMappingLoaded function with the initialization data
+                // This function should be defined in aps-view-basic.js and will use the provided data
+                // to set up the Metablock's initial state
+                onValueMappingLoaded(data);
+            })
+            .catch(error => {
+                // Log any errors that occur during the fetch operation
+                console.error('Error loading aps-view-basic.html:', error);
+            });
+    </script>
+</body>
+</html>
